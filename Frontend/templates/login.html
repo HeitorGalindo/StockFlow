@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-container">
+  <form method="POST" action="/login" class="login-form">
+    <h2>Login no FlowStock</h2>
+
+    {% if erro %}
+      <p style="color: red; font-weight: bold;">Nome ou cargo inválido.</p>
+    {% endif %}
+
+    <label for="nome">Nome do Funcionário</label>
+    <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+
+    <label for="cargo">Cargo</label>
+    <select id="cargo" name="cargo" required>
+      <option value="">Selecione o cargo</option>
+      <option value="vendedor">Vendedor</option>
+      <option value="gerente">Gerente</option>
+      <option value="adm">ADM</option>
+    </select>
+
+    <button type="submit">Entrar</button>
+  </form>
+</div>
+{% endblock %}

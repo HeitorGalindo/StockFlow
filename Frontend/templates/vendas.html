@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Vendas | StockFlow{% endblock %}
+
+{% block content %}
+<section class="vendas-container">
+  <h2>Registrar Venda</h2>
+
+  <form method="POST" action="/registrar_venda">
+    <label for="busca-produto">Buscar Produto:</label>
+    <input type="text" id="busca-produto" placeholder="Digite o nome do produto..." autocomplete="off">
+
+    <div id="sugestoes" class="sugestoes-container"></div>
+
+    <input type="hidden" id="produto_id" name="produto_id">
+
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" name="quantidade" min="1" required>
+
+    <button type="submit">Registrar Venda</button>
+  </form>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const inputBusca = document.getElementById("busca-produto");
+    const sugestoesBox = document.getElementById("sugestoes");
+    const inputProdutoId = document.getElementById("produto_id");
+  
+    if (inputBusca && sugestoesBox && inputProdutoId) {
+      inputBusca.addEventListener("input", function() {
+        const termo = this.value.toLowerCase();
+        sugestoesBox.innerHTML = "";
+  
+        {% for p in produtos %}
+          const nome_{{ p.id }} = "{{ p.nome|lower }}";
+          if (nome_{{ p.id }}.includes(termo)) {
+            const card = document.createElement("div");
+            card.className = "card-sugestao";
+            card.innerHTML = `
+              <strong>{{ p.nome }}</strong><br>
+              Categoria: {{ p.categoria }}<br>
+              Descrição: {{ p.descricao }}<br>
+              Quantidade: {{ p.quantidade }}<br>
+              Preço Compra: R$ {{ "%.2f"|format(p.preco_compra) }}<br>
+              Preço Revenda: R$ {{ "%.2f"|format(p.preco_revenda) }}<br>
+              Lucro Unitário: R$ {{ "%.2f"|format(p.lucro_unitario) }}<br>
+              Data Cadastro: {{ p.data_cadastro.strftime("%d/%m/%Y %H:%M") if p.data_cadastro else "N/A" }}
+            `;
+            card.addEventListener("click", function() {
+              inputBusca.value = "{{ p.nome }}";
+              inputProdutoId.value = "{{ p.id }}";
+              sugestoesBox.innerHTML = "";
+            });
+            sugestoesBox.appendChild(card);
+          }
+        {% endfor %}
+      });
+    }
+  });
+  </script>
+
+{% endblock %}

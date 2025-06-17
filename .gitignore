@@ -1,0 +1,18 @@
+# Ignore pastas de ambiente virtual
+venv/
+__pycache__/
+*.pyc
+
+# Ignore configurações locais de IDE
+.vscode/
+
+# Ignore arquivos de ambiente com senhas
+.env
+
+# Ignore arquivos de cache
+*.log
+
+# Ignore uploads de imagens, se não quiser subir imagens
+Frontend/static/uploads/
+
+.DS_Store

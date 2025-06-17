@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- Este arquivo deve estar salvo com codificação UTF-8 para evitar problemas com acentuação -->
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}StockFlow{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu de navegação">
+      <img src="{{ url_for('static', filename='icons/menu.svg') }}" alt="Ícone de Menu">
+    </button>
+  </div>
+
+  <div class="logo-container">
+    <img src="{{ url_for('static', filename='logo_stockflow.png') }}" alt="Logo StockFlow" class="logo-central">
+  </div>
+
+  <nav id="side-menu" class="side-menu" aria-label="Menu lateral">
+    <ul>
+      <li><a href="{{ url_for('index') }}">Início</a></li>
+      <li><a href="{{ url_for('produtos') }}">Produtos</a></li>
+      <li><a href="{{ url_for('vendas') }}">Vendas</a></li>
+      <li><a href="{{ url_for('relatorios') }}">Relatórios</a></li>
+      <li><a href="{{ url_for('estoque') }}">Estoque</a></li>
+      <li><a href="{{ url_for('funcionarios') }}">Funcionários</a></li>
+      <li><a href="{{ url_for('logout') }}">Sair</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - StockFlow</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>

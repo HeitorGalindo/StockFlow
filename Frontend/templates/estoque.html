@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Estoque | StockFlow{% endblock %}
+
+{% block content %}
+<h2>Estoque Atual</h2>
+<p>Lista de produtos com estoque disponível.</p>
+
+<div class="estoque-container">
+  {% if produtos and produtos|length > 0 %}
+    {% for produto in produtos %}
+      <div class="card-produto">
+        <img src="{{ produto.imagem if produto.imagem else '/static/no-image.png' }}"
+             alt="{{ produto.nome }}"
+             class="imagem-produto"
+             onerror="this.onerror=null;this.src='/static/no-image.png';">
+        <div class="info-produto">
+          <h3>{{ produto.nome }}</h3>
+          <p><strong>Categoria:</strong> {{ produto.categoria or "Sem categoria" }}</p>
+          <p><strong>Descrição:</strong> {{ produto.descricao or "Sem descrição" }}</p>
+          <p><strong>Quantidade:</strong> {{ produto.quantidade }}</p>
+          <p><strong>Preço de Compra:</strong> R$ {{ "%.2f"|format(produto.preco_compra or 0) }}</p>
+          <p><strong>Preço de Revenda:</strong> R$ {{ "%.2f"|format(produto.preco_revenda or 0) }}</p>
+          <p><strong>Lucro Unitário:</strong> R$ {{ "%.2f"|format(produto.lucro_unitario or 0) }}</p>
+          <p><strong>Cadastrado em:</strong> 
+            {% if produto.data_cadastro %}
+              {{ produto.data_cadastro.strftime("%d/%m/%Y %H:%M") }}
+            {% else %}
+              Não informado
+            {% endif %}
+          </p>
+        </div>
+        <form method="POST" action="/excluir_produto/{{ produto.id }}" style="margin-top: 10px;">
+          <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir Produto</button>
+        </form>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Nenhum produto com estoque disponível.</p>
+  {% endif %}
+</div>
+
+<a href="/" class="link-voltar">Voltar ao Início</a>
+{% endblock %}

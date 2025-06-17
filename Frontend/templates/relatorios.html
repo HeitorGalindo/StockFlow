@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Relatórios | Estoque Web{% endblock %}
+
+{% block content %}
+  <h2>Relatórios do Sistema</h2>
+  <p>Visualize abaixo o resumo de estoque e vendas.</p>
+
+  <section class="relatorio">
+    <h3>Estoque Atual</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Categoria</th>
+          <th>Quantidade</th>
+          <th>Preço (R$)</th>
+          <th>Preço Compra (R$)</th>
+          <th>Preço Revenda (R$)</th>
+          <th>Lucro Unitário (R$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for produto in produtos %}
+          <tr>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.descricao }}</td>
+            <td>{{ produto.quantidade }}</td>
+            <td>R$ {{ "%.2f"|format(produto.preco) }}</td>
+            <td>R$ {{ "%.2f"|format(produto.preco_compra) }}</td>
+            <td>R$ {{ "%.2f"|format(produto.preco_revenda) }}</td>
+            <td>R$ {{ "%.2f"|format(produto.lucro_unitario) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="relatorio">
+    <h3>Histórico de Vendas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Quantidade Vendida</th>
+          <th>Data</th>
+          <th>Vendedor</th>
+          <th>Lucro Total (R$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for venda in vendas %}
+          <tr>
+            <td>{{ venda.nome_produto }}</td>
+            <td>{{ venda.quantidade }}</td>
+            <td>
+              {% if venda.data_venda.strftime %}
+                {{ venda.data_venda.strftime("%d/%m/%Y %H:%M") }}
+              {% else %}
+                {{ venda.data_venda }}
+              {% endif %}
+            </td>
+            <td>{{ venda.vendedor }}</td>
+            <td>R$ {{ "%.2f"|format(venda.lucro_total) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4" style="text-align: right;"><strong>Lucro Total das Vendas:</strong></td>
+          <td><strong>R$ {{ "%.2f"|format(lucro_total_geral) }}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Início | FlowStock{% endblock %}
+
+{% block content %}
+<section class="inicio-container">
+  <div class="bem-vindo">
+    <h2>Bem-vindo ao StockFlow</h2>
+    <p>Gerencie produtos, controle vendas, cadastre funcionários e visualize relatórios de forma simples e eficaz.</p>
+    <a href="{{ url_for('produtos') }}" class="botao-destaque">Começar agora</a>
+  </div>
+
+  <div class="atalhos">
+    <div class="atalho-card">
+      <h3>📦 Produtos</h3>
+      <p>Cadastre, atualize e visualize todos os produtos disponíveis no estoque.</p>
+      <a href="{{ url_for('produtos') }}">Ir para Produtos</a>
+    </div>
+    <div class="atalho-card">
+      <h3>💰 Vendas</h3>
+      <p>Realize vendas e acompanhe o desempenho dos produtos.</p>
+      <a href="{{ url_for('vendas') }}">Ir para Vendas</a>
+    </div>
+    <div class="atalho-card">
+      <h3>📈 Relatórios</h3>
+      <p>Visualize um resumo geral do estoque e vendas realizadas.</p>
+      <a href="{{ url_for('relatorios') }}">Ver Relatórios</a>
+    </div>
+    <div class="atalho-card">
+      <h3>📋 Estoque</h3>
+      <p>Visualize todos os produtos com imagem, descrição e quantidade em tempo real.</p>
+      <a href="{{ url_for('estoque') }}">Ver Estoque</a>
+    </div>
+    <div class="atalho-card">
+      <h3>👥 Funcionários</h3>
+      <p>Gerencie sua equipe com controle de horários e cargos.</p>
+      <a href="{{ url_for('funcionarios') }}">Ver Funcionários</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

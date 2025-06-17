@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Página não encontrada - FlowStock{% endblock %}
+
+{% block content %}
+  <section class="erro404">
+    <h2>Erro 404 - Página não encontrada</h2>
+    <p>A página que você tentou acessar não existe ou foi movida.</p>
+    <a href="{{ url_for('index') }}" class="botao-destaque">Voltar para o início</a>
+  </section>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Funcionários | Estoque Web{% endblock %}
+
+{% block content %}
+<section class="cadastro-funcionarios">
+  <h2>Cadastro de Funcionários</h2>
+
+  <form method="post" action="/funcionarios">
+    <label for="nome">Nome do Funcionário</label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="cargo">Cargo</label>
+    <input type="text" id="cargo" name="cargo" required>
+
+    <label for="chegada">Horário de Chegada</label>
+    <input type="time" id="chegada" name="chegada" required>
+
+    <label for="almoco">Horário de Almoço</label>
+    <input type="time" id="almoco" name="almoco" required>
+
+    <label for="saida">Horário de Saída</label>
+    <input type="time" id="saida" name="saida" required>
+
+    <label for="carga">Carga Horária (horas por dia)</label>
+    <input type="number" id="carga" name="carga" min="1" required>
+
+    <button type="submit">Cadastrar Funcionário</button>
+  </form>
+</section>
+
+<section class="lista-funcionarios">
+  <h2>Funcionários Cadastrados</h2>
+
+  {% if funcionarios %}
+    <ul>
+      {% for f in funcionarios %}
+        <li>
+          <strong>{{ f.nome }}</strong> — {{ f.cargo }}<br>
+          Chegada: {{ f.chegada }} | Almoço: {{ f.almoco }} | Saída: {{ f.saida }} | Carga: {{ f.carga }}h
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nenhum funcionário cadastrado ainda.</p>
+  {% endif %}
+</section>
+{% endblock %}
