@@ -4,7 +4,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from Backend.controllers import (
+from controllers import (
     cadastrar_produto_controller,
     listar_produtos_nomes_controller,
     listar_vendedores_controller,
@@ -19,7 +19,7 @@ from Backend.controllers import (
     excluir_produto_controller,
 )
 
-from Backend.models import EstoqueModel
+from models import EstoqueModel
 
 app = Flask(
     __name__,
