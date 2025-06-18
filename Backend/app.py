@@ -4,7 +4,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from controllers import (
+from Backend.controllers import  (
     cadastrar_produto_controller,
     listar_produtos_nomes_controller,
     listar_vendedores_controller,
