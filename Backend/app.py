@@ -19,7 +19,7 @@ from Backend.controllers import  (
     excluir_produto_controller,
 )
 
-from models import EstoqueModel
+from Backend.models import EstoqueModel
 
 app = Flask(
     __name__,
